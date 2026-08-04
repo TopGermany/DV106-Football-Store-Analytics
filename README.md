@@ -1,6 +1,6 @@
 # ️⚽ Phân tích hiệu quả kinh doanh và hành vi khách hàng của cửa hàng bóng đá DV-106 
 
-## Mục lục
+## 📖 Mục lục
 
 1. [Tổng quan dự án](#1-tổng-quan-dự-án)
 2. [Vấn đề doanh nghiệp](#2-vấn-đề-doanh-nghiệp)
