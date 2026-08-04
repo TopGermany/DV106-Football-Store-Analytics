@@ -2,15 +2,17 @@
 
 ## 📖 Mục lục
 
-1. [Tổng quan dự án](#1-tổng-quan-dự-án)
-2. [Vấn đề doanh nghiệp](#2-vấn-đề-doanh-nghiệp)
-3. [Kiến trúc dữ liệu và ERD](#3-kiến-trúc-dữ-liệu-và-erd)
-4. [Khám phá dữ liệu bằng SQL Server](#4-khám-phá-dữ-liệu-bằng-sql-server)
-5. [Câu hỏi phân tích](#5-câu-hỏi-phân-tích)
-6. [Kết quả phân tích nổi bật](#6-kết-quả-phân-tích-nổi-bật)
-7. [Hệ thống dashboard phân tích](#7-hệ-thống-dashboard-phân-tích)
-8. [Đề xuất kinh doanh](#8-đề-xuất-kinh-doanh)
+1. [📖 Tổng quan dự án](#project-overview)
+2. [⁉️ Vấn đề doanh nghiệp](#business-problem)
+3. [🏭 Kiến trúc dữ liệu và ERD](#data-architecture)
+4. [⌨️ Khám phá dữ liệu bằng SQL Server](#sql-eda)
+5. [❔ Câu hỏi phân tích](#analysis-questions)
+6. [🕵️ Kết quả phân tích nổi bật](#key-findings)
+7. [📊 Hệ thống dashboard phân tích](#dashboard-system)
+8. [📈 Đề xuất kinh doanh](#business-recommendations)
+9. [🤗 Bài học và kỹ năng đạt được](#lessons-learned)
 
+<a id="project-overview"></a>
 ## 📖 1. Tổng quan dự án
 
 DV-106 là mô hình cửa hàng thương mại điện tử chuyên kinh doanh áo đấu, giày và phụ kiện bóng đá. Danh mục gồm áo câu lạc bộ, áo đội tuyển quốc gia, áo training, giày bóng đá, bóng, găng tay thủ môn, lót giày–tất, túi thể thao và sản phẩm trẻ em. Cửa hàng phục vụ năm phân khúc, từ học sinh–sinh viên nhạy cảm về giá đến người hâm mộ có thu nhập khá và nhu cầu sưu tầm áo authentic.
@@ -31,6 +33,7 @@ Bộ dữ liệu ghi nhận hoạt động từ ngày 01/01/2022 đến 31/12/20
 
 Mục tiêu của dự án là xây dựng một nguồn dữ liệu sạch, định nghĩa KPI nhất quán và bốn dashboard giúp DV-106 nhận diện nguyên nhân suy giảm, phân bổ nguồn lực đúng phân khúc, tối ưu danh mục và chọn thời điểm triển khai chiến dịch.
 
+<a id="business-problem"></a>
 ## ⁉️ 2. Vấn đề doanh nghiệp
 
 ### 2.1 Tăng trưởng đảo chiều trong năm 2024
@@ -63,6 +66,7 @@ Trong 130.166 khách hàng, có 59.704 khách chỉ mua một lần, tương đ�
 
 Ngày thường tạo trung bình 276,05 triệu đồng/ngày. Giai đoạn khai mạc mùa giải mới đạt 445,39 triệu đồng/ngày, cao hơn **61,3%**, trong khi Tết chỉ đạt 160,39 triệu đồng/ngày và Asian Cup đạt 173,98 triệu đồng/ngày. Doanh nghiệp cần phân biệt sự kiện tạo cầu thật với sự kiện chỉ có tổng doanh thu lớn do kéo dài nhiều ngày.
 
+<a id="data-architecture"></a>
 ## 🏭 3. Kiến trúc dữ liệu và ERD
 
 Dữ liệu export từ Tableau đã được phục hồi thành mô hình giao dịch chuẩn, tách bảng đơn hàng, chi tiết đơn và các dimension. Các calculated field trùng lặp của Tableau không được đưa vào tầng clean.
@@ -112,7 +116,8 @@ erDiagram
     }
 ```
 
-## ⌨ 4. Khám phá dữ liệu bằng SQL Server
+<a id="sql-eda"></a>
+## ⌨️ 4. Khám phá dữ liệu bằng SQL Server
 
 Sau khi chuẩn hóa dữ liệu thành mô hình fact–dimension, SQL Server được sử dụng để kiểm tra KPI, khám phá xu hướng và tạo bằng chứng định lượng trước khi trực quan hóa trên Tableau. Toàn bộ truy vấn có thể xem tại [Ecommer_Football.sql](Ecommer_Football.sql).
 
@@ -360,6 +365,7 @@ ORDER BY Order_Hour;
 
 Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày và ca 20:00–23:59 có số đơn cao nhất, phù hợp để ưu tiên quảng cáo, tồn kho sẵn sàng và nhân sự xử lý đơn.
 
+<a id="analysis-questions"></a>
 ## ❔ 5. Câu hỏi phân tích
 
 1. Doanh thu, lợi nhuận, số đơn, số khách và AOV biến động thế nào theo năm, quý và tháng?
@@ -373,6 +379,7 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 9. Ngày trong tuần và khung giờ nào có nhu cầu cao nhất để tối ưu quảng cáo, nhân sự và tồn kho?
 10. DV-106 nên ưu tiên phân khúc, danh mục và chiến dịch nào để phục hồi tăng trưởng?
 
+<a id="key-findings"></a>
 ## 🕵️ 6. Kết quả phân tích nổi bật
 
 - **2024 là điểm suy giảm rõ rệt:** doanh thu giảm 28,9%, lợi nhuận giảm 29,0%, số đơn giảm 20,0% và AOV giảm 11,1% so với 2023.
@@ -385,7 +392,8 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 - **Dư địa giữ chân còn lớn:** 45,87% khách hàng chỉ mua một lần. Việc cải thiện repeat rate có thể giúp phục hồi tăng trưởng mà không phụ thuộc hoàn toàn vào chi phí tìm khách mới.
 - **Giỏ hàng có khả năng bundle tốt:** bình quân mỗi đơn chứa 4,02 SKU khác nhau và 4,35 sản phẩm; 129.293 đơn có từ năm SKU trở lên.
 
-## 7. 📊 Hệ thống dashboard phân tích
+<a id="dashboard-system"></a>
+## 📊 7. Hệ thống dashboard phân tích
 
 ### Dashboard 1 — Overview
 
@@ -419,7 +427,8 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 
 **Insight chính:** khai mạc mùa giải mới tạo uplift doanh thu/ngày mạnh nhất. Thứ Bảy, Chủ Nhật và khung 20:00–23:59 là các thời điểm nhu cầu cao. Ngược lại, Tết và Asian Cup có doanh thu/ngày thấp hơn ngày thường, nên không nên mặc định mọi sự kiện đều đáng đầu tư ngân sách lớn.
 
-## 8. 📈 Đề xuất kinh doanh
+<a id="business-recommendations"></a>
+## 📈 8. Đề xuất kinh doanh
 
 ### 8.1 Phục hồi tăng trưởng bằng chiến lược khách hàng hai tầng
 
@@ -452,9 +461,16 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 - Định nghĩa AOV là `SUM(revenue) / COUNTD(order_id)` và margin là `SUM(profit) / SUM(revenue)` để tránh sai lệch từ dữ liệu line-item.
 - Bổ sung dữ liệu discount, marketing cost, inventory, returns và channel trong giai đoạn tiếp theo để đo ROAS, tồn kho và lợi nhuận thực sau khuyến mãi.
 
-## 🤗 9. Tôi đã học được gì trong dự án ?
-- Biết cách phân tích một dự án liên quan tới sàn thương mại điện tử của một cửa hàng bóng đá
-- Hiểu được các chỉ số quan trọng như AOV, Biên lợi nhuận,.... để phân tích
-- Biết cách sử dụng công cụ SQL để truy vấn cũng như là khai phá dữ liệu
-- Xây dựng được các Dashboard cho nhà quản trị 
+<a id="lessons-learned"></a>
+## 🤗 9. Bài học và kỹ năng đạt được
+
+Thông qua dự án, mình đã phát triển quy trình phân tích dữ liệu xuyên suốt từ dữ liệu nguồn đến đề xuất kinh doanh:
+
+- **Data modeling:** xác định đúng grain của dữ liệu, phục hồi bản export Tableau thành mô hình fact–dimension và thiết lập quan hệ PK/FK phục vụ truy vấn.
+- **Data quality:** kiểm tra khóa trùng, giá trị thiếu, dữ liệu âm, tính nhất quán giữa số lượng–đơn giá–doanh thu–giá vốn–lợi nhuận và bảo vệ thông tin khách hàng.
+- **KPI governance:** hiểu và tính đúng Revenue, Profit, Orders, Customers, Units, AOV và Profit Margin; tránh double-count khi join bảng đơn hàng với chi tiết sản phẩm.
+- **SQL Server:** thực hành CTE, `LAG()`, `NTILE()`, window functions, aggregate functions và multi-table JOIN để phân tích YoY, RFM, phân khúc, danh mục và mùa vụ.
+- **Tableau:** xây dựng bốn dashboard theo luồng Overview → Customer → Goods → Seasonality, kết hợp filter và nhiều kỹ thuật trực quan để phục vụ quyết định quản trị.
+- **Business thinking:** chuyển kết quả kỹ thuật thành vấn đề có thể hành động, như suy giảm tăng trưởng năm 2024, khách mua một lần, nhóm giày có margin thấp và cơ hội cross-sell phụ kiện.
+- **Data storytelling:** tổ chức portfolio theo mạch bối cảnh → vấn đề → mô hình dữ liệu → EDA → insight → dashboard → đề xuất, giúp người đọc hiểu cả phương pháp lẫn giá trị kinh doanh.
 
