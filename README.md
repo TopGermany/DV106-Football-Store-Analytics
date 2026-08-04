@@ -216,15 +216,15 @@ ORDER BY order_year;
 
 Phần customer EDA gồm ba lớp:
 
-- 1. So sánh khách hàng, đơn hàng, doanh thu, lợi nhuận và AOV giữa các phân khúc.
+- So sánh khách hàng, đơn hàng, doanh thu, lợi nhuận và AOV giữa các phân khúc.
 
 <img width="1427" height="382" alt="image" src="https://github.com/user-attachments/assets/5fa756e9-a7ee-4ab3-8619-168052899bd0" />
 
-- 2. Đếm số đơn theo khách để tách one-time và repeat customer.
+- Đếm số đơn theo khách để tách one-time và repeat customer.
 
 <img width="1426" height="382" alt="image" src="https://github.com/user-attachments/assets/15626dfe-6079-4ae0-baba-de4723f7f35e" />
 
-- 3. Tính Recency–Frequency–Monetary và chia mỗi chỉ số thành năm nhóm bằng `NTILE(5)`.
+- Tính Recency–Frequency–Monetary và chia mỗi chỉ số thành năm nhóm bằng `NTILE(5)`.
 
 ```sql
 WITH CustomerRFM AS (
@@ -452,4 +452,9 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 - Định nghĩa AOV là `SUM(revenue) / COUNTD(order_id)` và margin là `SUM(profit) / SUM(revenue)` để tránh sai lệch từ dữ liệu line-item.
 - Bổ sung dữ liệu discount, marketing cost, inventory, returns và channel trong giai đoạn tiếp theo để đo ROAS, tồn kho và lợi nhuận thực sau khuyến mãi.
 
+## 🤗 9. Tôi đã học được gì trong dự án ?
+- Biết cách phân tích một dự án liên quan tới sàn thương mại điện tử của một cửa hàng bóng đá
+- Hiểu được các chỉ số quan trọng như AOV, Biên lợi nhuận,.... để phân tích
+- Biết cách sử dụng công cụ SQL để truy vấn cũng như là khai phá dữ liệu
+- Xây dựng được các Dashboard cho nhà quản trị 
 
