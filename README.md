@@ -1,4 +1,4 @@
-# ️⚽ Phân tích hiệu quả kinh doanh và hành vi khách hàng của cửa hàng bóng đá DV-106 trên sàn thương mại điện tử
+# ️⚽ Phân tích hiệu quả kinh doanh và hành vi khách hàng của cửa hàng bóng đá DV-106 
 
 ## Mục lục
 
@@ -11,7 +11,7 @@
 7. [Hệ thống dashboard phân tích](#7-hệ-thống-dashboard-phân-tích)
 8. [Đề xuất kinh doanh](#8-đề-xuất-kinh-doanh)
 
-## 1. Tổng quan dự án
+## 📖 1. Tổng quan dự án
 
 DV-106 là mô hình cửa hàng thương mại điện tử chuyên kinh doanh áo đấu, giày và phụ kiện bóng đá. Danh mục gồm áo câu lạc bộ, áo đội tuyển quốc gia, áo training, giày bóng đá, bóng, găng tay thủ môn, lót giày–tất, túi thể thao và sản phẩm trẻ em. Cửa hàng phục vụ năm phân khúc, từ học sinh–sinh viên nhạy cảm về giá đến người hâm mộ có thu nhập khá và nhu cầu sưu tầm áo authentic.
 
@@ -31,7 +31,7 @@ Bộ dữ liệu ghi nhận hoạt động từ ngày 01/01/2022 đến 31/12/20
 
 Mục tiêu của dự án là xây dựng một nguồn dữ liệu sạch, định nghĩa KPI nhất quán và bốn dashboard giúp DV-106 nhận diện nguyên nhân suy giảm, phân bổ nguồn lực đúng phân khúc, tối ưu danh mục và chọn thời điểm triển khai chiến dịch.
 
-## 2. Vấn đề doanh nghiệp
+## ⁉️ 2. Vấn đề doanh nghiệp
 
 ### 2.1 Tăng trưởng đảo chiều trong năm 2024
 
@@ -63,7 +63,7 @@ Trong 130.166 khách hàng, có 59.704 khách chỉ mua một lần, tương đ�
 
 Ngày thường tạo trung bình 276,05 triệu đồng/ngày. Giai đoạn khai mạc mùa giải mới đạt 445,39 triệu đồng/ngày, cao hơn **61,3%**, trong khi Tết chỉ đạt 160,39 triệu đồng/ngày và Asian Cup đạt 173,98 triệu đồng/ngày. Doanh nghiệp cần phân biệt sự kiện tạo cầu thật với sự kiện chỉ có tổng doanh thu lớn do kéo dài nhiều ngày.
 
-## 3. Kiến trúc dữ liệu và ERD
+## 🏭 3. Kiến trúc dữ liệu và ERD
 
 Dữ liệu export từ Tableau đã được phục hồi thành mô hình giao dịch chuẩn, tách bảng đơn hàng, chi tiết đơn và các dimension. Các calculated field trùng lặp của Tableau không được đưa vào tầng clean.
 
@@ -112,9 +112,7 @@ erDiagram
     }
 ```
 
-Quan hệ và quy tắc phục hồi chi tiết nằm trong [docs/reconstruction.md](docs/reconstruction.md). Tên khách hàng thuộc dữ liệu riêng tư và không được đưa lên GitHub.
-
-## 4. Khám phá dữ liệu bằng SQL Server
+## ⌨ 4. Khám phá dữ liệu bằng SQL Server
 
 Sau khi chuẩn hóa dữ liệu thành mô hình fact–dimension, SQL Server được sử dụng để kiểm tra KPI, khám phá xu hướng và tạo bằng chứng định lượng trước khi trực quan hóa trên Tableau. Toàn bộ truy vấn có thể xem tại [Ecommer_Football.sql](Ecommer_Football.sql).
 
@@ -219,7 +217,9 @@ ORDER BY order_year;
 Phần customer EDA gồm ba lớp:
 
 1. So sánh khách hàng, đơn hàng, doanh thu, lợi nhuận và AOV giữa các phân khúc.
+<img width="1427" height="382" alt="image" src="https://github.com/user-attachments/assets/5fa756e9-a7ee-4ab3-8619-168052899bd0" />
 2. Đếm số đơn theo khách để tách one-time và repeat customer.
+<img width="1426" height="382" alt="image" src="https://github.com/user-attachments/assets/15626dfe-6079-4ae0-baba-de4723f7f35e" />
 3. Tính Recency–Frequency–Monetary và chia mỗi chỉ số thành năm nhóm bằng `NTILE(5)`.
 
 ```sql
@@ -242,6 +242,7 @@ SELECT
     NTILE(5) OVER (ORDER BY monetary) AS m_score
 FROM CustomerRFM;
 ```
+<img width="1427" height="382" alt="image" src="https://github.com/user-attachments/assets/c9ecce18-3cae-45b7-a5c9-49357b83ad38" />
 
 Kết quả cho thấy 70.462 khách hàng quay lại ít nhất một lần, chiếm 54,13%; 59.704 khách chỉ mua một lần, chiếm 45,87%. B2 dẫn đầu về doanh thu và AOV, trong khi A1 có margin tốt hơn nhưng giá trị đơn thấp hơn.
 
@@ -252,28 +253,49 @@ Doanh thu và lợi nhuận category được tính lại từ dòng sản phẩ
 ```sql
 WITH CategorySummary AS (
     SELECT
-        C.category_id,
-        C.category_name,
-        COUNT(DISTINCT I.order_id) AS Total_Orders,
-        SUM(I.quantity * I.unit_price) AS Total_Revenue,
-        SUM(I.quantity * (I.unit_price - I.unit_cost)) AS Total_Profit,
-        SUM(I.quantity) AS Total_Units
-    FROM fact_order_items AS I
-    INNER JOIN dim_products AS P
-        ON I.product_id = P.product_id
-    INNER JOIN dim_categories AS C
-        ON P.category_id = C.category_id
-    GROUP BY C.category_id, C.category_name
+        DC.category_id,
+        DC.category_name,
+        COUNT(DISTINCT FOI.order_id) AS Total_Order,
+        SUM(
+            CAST(FOI.quantity AS DECIMAL(18, 2))
+            * CAST(FOI.unit_price AS DECIMAL(18, 2))
+        ) AS Total_Revenue,
+        SUM(
+            CAST(FOI.quantity AS DECIMAL(18, 2))
+            * (
+                CAST(FOI.unit_price AS DECIMAL(18, 2))
+                - CAST(FOI.unit_cost AS DECIMAL(18, 2))
+            )
+        ) AS Total_Profit,
+
+        SUM(
+            CAST(FOI.quantity AS DECIMAL(18, 2))
+        ) AS Total_Units
+    FROM fact_order_items AS FOI
+    INNER JOIN dim_products AS DP
+        ON FOI.product_id = DP.product_id
+    INNER JOIN dim_categories AS DC
+        ON DP.category_id = DC.category_id
+    GROUP BY
+        DC.category_id,
+        DC.category_name
 )
 SELECT
-    *,
+    category_id,
+    category_name,
+    Total_Order,
+    Total_Revenue,
+    Total_Profit,
+    Total_Units,
     ROUND(
-        Total_Profit * 100.0 / NULLIF(Total_Revenue, 0),
+        100.0 * Total_Profit / NULLIF(Total_Revenue, 0),
         2
     ) AS Profit_Margin_Percent
+
 FROM CategorySummary
 ORDER BY Total_Revenue DESC;
 ```
+<img width="1427" height="382" alt="image" src="https://github.com/user-attachments/assets/486bda5f-6a63-46e2-a52b-c7fbc4c25ce9" />
 
 EDA chỉ ra sự khác biệt lớn về chất lượng doanh thu: áo câu lạc bộ đạt 60,72 tỷ đồng với margin 62,03%; giày bóng đá đạt 59,94 tỷ đồng nhưng margin chỉ 31,42%; lót giày–tất có margin 68,96% và phù hợp làm sản phẩm mua kèm.
 
@@ -282,28 +304,55 @@ EDA chỉ ra sự khác biệt lớn về chất lượng doanh thu: áo câu l�
 Doanh thu được tổng hợp theo ngày–giờ trước, sau đó mới lấy trung bình giữa các ngày. Cách này giúp trả lời “một giờ điển hình tạo bao nhiêu doanh thu” thay vì lấy trung bình từng đơn hàng.
 
 ```sql
-WITH AnalysisHour AS (
+WITH Analysis_Hour AS (
     SELECT
-        CAST(order_datetime AS DATE) AS order_date,
-        DATEPART(HOUR, order_datetime) AS order_hour,
-        SUM(CAST(order_revenue AS DECIMAL(18,2))) AS daily_hour_revenue,
-        SUM(CAST(order_units AS INT)) AS daily_hour_units
+        CAST(order_datetime AS DATE) AS Order_Date,
+        DATEPART(HOUR, order_datetime) AS Order_Hour,
+        SUM(TRY_CAST(order_revenue AS DECIMAL(18, 2))) AS Total_Revenue,
+        SUM(TRY_CAST(order_units AS DECIMAL(18, 2))) AS Total_Quantity
     FROM fact_orders
+    WHERE order_datetime IS NOT NULL
     GROUP BY
         CAST(order_datetime AS DATE),
         DATEPART(HOUR, order_datetime)
 )
+
 SELECT
-    order_hour,
-    ROUND(AVG(daily_hour_revenue) / 1000000.0, 2)
-        AS Avg_Revenue_Million_VND,
-    ROUND(AVG(CAST(daily_hour_units AS DECIMAL(18,2))), 2)
-        AS Avg_Units
-FROM AnalysisHour
-WHERE order_hour BETWEEN 8 AND 23
-GROUP BY order_hour
-ORDER BY order_hour;
+    CASE Order_Hour
+        WHEN 8  THEN '08:00-08:59'
+        WHEN 9  THEN '09:00-09:59'
+        WHEN 10 THEN '10:00-10:59'
+        WHEN 11 THEN '11:00-11:59'
+        WHEN 12 THEN '12:00-12:59'
+        WHEN 13 THEN '13:00-13:59'
+        WHEN 14 THEN '14:00-14:59'
+        WHEN 15 THEN '15:00-15:59'
+        WHEN 16 THEN '16:00-16:59'
+        WHEN 17 THEN '17:00-17:59'
+        WHEN 18 THEN '18:00-18:59'
+        WHEN 19 THEN '19:00-19:59'
+        WHEN 20 THEN '20:00-20:59'
+        WHEN 21 THEN '21:00-21:59'
+        WHEN 22 THEN '22:00-22:59'
+        WHEN 23 THEN '23:00-23:59'
+    END AS Hour_Range,
+
+    ROUND(
+        AVG(Total_Revenue) / 1000000.0,
+        2
+    ) AS AVG_Revenue_Million_VND,
+
+    ROUND(
+        AVG(Total_Quantity),
+        2
+    ) AS AVG_Quantity_SKUs
+
+FROM Analysis_Hour
+WHERE Order_Hour BETWEEN 8 AND 23
+GROUP BY Order_Hour
+ORDER BY Order_Hour;
 ```
+<img width="1425" height="382" alt="image" src="https://github.com/user-attachments/assets/aaf8afac-96d9-44eb-a47a-99b01dc6dd11" />
 
 Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày và ca 20:00–23:59 có số đơn cao nhất, phù hợp để ưu tiên quảng cáo, tồn kho sẵn sàng và nhân sự xử lý đơn.
 
