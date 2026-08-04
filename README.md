@@ -1,9 +1,6 @@
 # DV-106 Football E-commerce Analytics
 
 > **Đề tài:** Phân tích hiệu quả kinh doanh và hành vi khách hàng của cửa hàng bóng đá DV-106  
-> **Tên repository đề xuất:** `dv106-football-ecommerce-analytics`
-
-Dự án sử dụng Python, SQL Server và Tableau để chuyển đổi 1,47 triệu dòng dữ liệu giao dịch thành hệ thống phân tích phục vụ quyết định về tăng trưởng, khách hàng, danh mục sản phẩm và mùa vụ.
 
 ## Mục lục
 
