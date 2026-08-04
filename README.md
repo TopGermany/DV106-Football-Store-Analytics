@@ -11,6 +11,8 @@
 7. [📊 Hệ thống dashboard phân tích](#dashboard-system)
 8. [📈 Đề xuất kinh doanh](#business-recommendations)
 9. [🤗 Bài học và kỹ năng đạt được](#lessons-learned)
+
+
 [▶ View DV-106 Football E-commerce Dashboard](https://public.tableau.com/app/profile/ho.quoc.cuong/viz/Ecommer_Football_Dashboard/Seasonality?publish=yes)
 
 <a id="project-overview"></a>
