@@ -216,11 +216,15 @@ ORDER BY order_year;
 
 Phần customer EDA gồm ba lớp:
 
-1. So sánh khách hàng, đơn hàng, doanh thu, lợi nhuận và AOV giữa các phân khúc.
+- 1. So sánh khách hàng, đơn hàng, doanh thu, lợi nhuận và AOV giữa các phân khúc.
+
 <img width="1427" height="382" alt="image" src="https://github.com/user-attachments/assets/5fa756e9-a7ee-4ab3-8619-168052899bd0" />
-2. Đếm số đơn theo khách để tách one-time và repeat customer.
+
+- 2. Đếm số đơn theo khách để tách one-time và repeat customer.
+
 <img width="1426" height="382" alt="image" src="https://github.com/user-attachments/assets/15626dfe-6079-4ae0-baba-de4723f7f35e" />
-3. Tính Recency–Frequency–Monetary và chia mỗi chỉ số thành năm nhóm bằng `NTILE(5)`.
+
+- 3. Tính Recency–Frequency–Monetary và chia mỗi chỉ số thành năm nhóm bằng `NTILE(5)`.
 
 ```sql
 WITH CustomerRFM AS (
@@ -244,7 +248,7 @@ FROM CustomerRFM;
 ```
 <img width="1427" height="382" alt="image" src="https://github.com/user-attachments/assets/c9ecce18-3cae-45b7-a5c9-49357b83ad38" />
 
-Kết quả cho thấy 70.462 khách hàng quay lại ít nhất một lần, chiếm 54,13%; 59.704 khách chỉ mua một lần, chiếm 45,87%. B2 dẫn đầu về doanh thu và AOV, trong khi A1 có margin tốt hơn nhưng giá trị đơn thấp hơn.
+- Kết quả cho thấy 70.462 khách hàng quay lại ít nhất một lần, chiếm 54,13%; 59.704 khách chỉ mua một lần, chiếm 45,87%. B2 dẫn đầu về doanh thu và AOV, trong khi A1 có margin tốt hơn nhưng giá trị đơn thấp hơn.
 
 ### 4.7 Phân tích sản phẩm và nhóm hàng
 
@@ -356,7 +360,7 @@ ORDER BY Order_Hour;
 
 Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày và ca 20:00–23:59 có số đơn cao nhất, phù hợp để ưu tiên quảng cáo, tồn kho sẵn sàng và nhân sự xử lý đơn.
 
-## 5. Câu hỏi phân tích
+## ❔ 5. Câu hỏi phân tích
 
 1. Doanh thu, lợi nhuận, số đơn, số khách và AOV biến động thế nào theo năm, quý và tháng?
 2. Yếu tố nào đóng góp lớn nhất vào mức giảm doanh thu năm 2024: khách hàng, tần suất mua hay giá trị giỏ hàng?
@@ -369,7 +373,7 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 9. Ngày trong tuần và khung giờ nào có nhu cầu cao nhất để tối ưu quảng cáo, nhân sự và tồn kho?
 10. DV-106 nên ưu tiên phân khúc, danh mục và chiến dịch nào để phục hồi tăng trưởng?
 
-## 6. Kết quả phân tích nổi bật
+## 🕵️ 6. Kết quả phân tích nổi bật
 
 - **2024 là điểm suy giảm rõ rệt:** doanh thu giảm 28,9%, lợi nhuận giảm 29,0%, số đơn giảm 20,0% và AOV giảm 11,1% so với 2023.
 - **B2 là phân khúc giá trị cao nhất:** đóng góp 117,14 tỷ đồng, tương đương 37,25% tổng doanh thu; AOV đạt 1,186 triệu đồng, nhưng margin 48,1% còn dưới trung bình.
@@ -381,11 +385,11 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 - **Dư địa giữ chân còn lớn:** 45,87% khách hàng chỉ mua một lần. Việc cải thiện repeat rate có thể giúp phục hồi tăng trưởng mà không phụ thuộc hoàn toàn vào chi phí tìm khách mới.
 - **Giỏ hàng có khả năng bundle tốt:** bình quân mỗi đơn chứa 4,02 SKU khác nhau và 4,35 sản phẩm; 129.293 đơn có từ năm SKU trở lên.
 
-## 7. Hệ thống dashboard phân tích
+## 7. 📊 Hệ thống dashboard phân tích
 
 ### Dashboard 1 — Overview
 
-![Overview dashboard](reports/figures/dashboard_overview.png)
+<img width="1310" height="766" alt="Screenshot 2026-08-03 230703" src="https://github.com/user-attachments/assets/fb1be2c9-3729-4eac-b541-5ac5ad1c5efc" />
 
 **Tác dụng:** cung cấp health check toàn doanh nghiệp thông qua khách hàng, doanh thu, lợi nhuận, sản lượng, phân khúc, cơ cấu đơn và xu hướng theo thời gian.
 
@@ -393,7 +397,7 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 
 ### Dashboard 2 — Customer
 
-![Customer dashboard](reports/figures/dashboard_customer.png)
+<img width="1311" height="766" alt="Screenshot 2026-08-03 230715" src="https://github.com/user-attachments/assets/85db2daa-db69-4633-86bc-788e02c3cd70" />
 
 **Tác dụng:** phân tích cơ cấu phân khúc, RFM, khách mới–khách quay lại, retention và mối quan hệ giữa phân khúc với nhóm hàng.
 
@@ -401,7 +405,7 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 
 ### Dashboard 3 — Goods
 
-![Goods dashboard](reports/figures/dashboard_goods.png)
+<img width="1293" height="728" alt="Screenshot 2026-08-03 230734" src="https://github.com/user-attachments/assets/b31186ea-99e2-4ca9-a59d-86a089a3f431" />
 
 **Tác dụng:** đánh giá hiệu quả danh mục và SKU theo doanh thu, lợi nhuận, margin, quy mô, tăng trưởng, ABC/Pareto và hành vi mua kèm.
 
@@ -409,13 +413,13 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 
 ### Dashboard 4 — Seasonality
 
-![Seasonality dashboard](reports/figures/dashboard_seasonality.png)
+<img width="1307" height="742" alt="Screenshot 2026-08-03 230753" src="https://github.com/user-attachments/assets/d822f8b0-6ebb-4fc3-b683-9cc3e9f370f5" />
 
 **Tác dụng:** nhận diện mùa cao điểm theo tháng, sự kiện bóng đá, ngày trong tuần, ngày trong tháng và khung giờ; đồng thời xếp hạng sản phẩm theo tiêu chí lựa chọn.
 
 **Insight chính:** khai mạc mùa giải mới tạo uplift doanh thu/ngày mạnh nhất. Thứ Bảy, Chủ Nhật và khung 20:00–23:59 là các thời điểm nhu cầu cao. Ngược lại, Tết và Asian Cup có doanh thu/ngày thấp hơn ngày thường, nên không nên mặc định mọi sự kiện đều đáng đầu tư ngân sách lớn.
 
-## 8. Đề xuất kinh doanh
+## 8. 📈 Đề xuất kinh doanh
 
 ### 8.1 Phục hồi tăng trưởng bằng chiến lược khách hàng hai tầng
 
@@ -448,50 +452,4 @@ Kết quả hỗ trợ insight vận hành: nhu cầu tăng về cuối ngày v�
 - Định nghĩa AOV là `SUM(revenue) / COUNTD(order_id)` và margin là `SUM(profit) / SUM(revenue)` để tránh sai lệch từ dữ liệu line-item.
 - Bổ sung dữ liệu discount, marketing cost, inventory, returns và channel trong giai đoạn tiếp theo để đo ROAS, tồn kho và lợi nhuận thực sau khuyến mãi.
 
-## Data pipeline và cách chạy
 
-```bash
-python src/reconstruct_raw.py --input Ecommer_Data.csv --output data/clean
-python src/data_pipeline.py --input Ecommer_Data.csv --output data/processed
-python -m unittest discover -s tests -v
-```
-
-```text
-Ecommer_Data.csv (Tableau export)
-        ↓ reconstruct_raw.py
-Fact orders + fact order items + dimensions
-        ↓ SQL Server / Ecommer_Football.sql
-EDA + KPI validation + customer/product/seasonality analysis
-        ↓ data_pipeline.py
-Analytical marts
-        ↓ Tableau
-Overview | Customer | Goods | Seasonality
-```
-
-## Cấu trúc repository
-
-```text
-.
-├── data/
-│   ├── raw/                     # dữ liệu nguồn, không commit
-│   ├── clean/                   # fact/dimension, không commit
-│   └── processed/               # data marts, không commit mặc định
-├── docs/
-│   ├── analysis_plan.md
-│   ├── data_dictionary.md
-│   └── reconstruction.md
-├── reports/figures/             # ảnh dashboard dùng trong README
-├── scripts/                     # profiling và insight validation
-├── src/
-│   ├── reconstruct_raw.py
-│   └── data_pipeline.py
-├── tests/test_metrics.py
-├── Ecommer_Football.sql          # toàn bộ EDA bằng SQL Server
-└── README.md
-```
-
-## Data privacy và giới hạn
-
-- Raw data và bảng khách hàng chứa thông tin cá nhân nên không được commit.
-- Workbook `.twbx` hiện tại lớn hơn giới hạn file thông thường của GitHub và có thể đóng gói dữ liệu; chỉ chia sẻ sau khi loại PII hoặc dùng Tableau Public với nguồn đã ẩn danh.
-- Dữ liệu chưa có discount, chi phí marketing, tồn kho, hoàn trả và kênh bán; các đề xuất liên quan ROAS hoặc inventory cần bổ sung nguồn trước khi triển khai.
