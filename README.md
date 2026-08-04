@@ -1,6 +1,4 @@
-# DV-106 Football E-commerce Analytics
-
-> **Đề tài:** Phân tích hiệu quả kinh doanh và hành vi khách hàng của cửa hàng bóng đá DV-106  
+# ️⚽ Phân tích hiệu quả kinh doanh và hành vi khách hàng của cửa hàng bóng đá DV-106 trên sàn thương mại điện tử
 
 ## Mục lục
 
